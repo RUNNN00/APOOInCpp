@@ -1,8 +1,18 @@
+#pragma once
 
-#include "DisplayRuan.cpp"
-#include "Enums.cpp"
+enum Digit { ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGTH, NINE };
+enum Signal { POSITIVE, NEGATIVE };
+enum Operator { ADD, SUBTRACT, MULTIPLY, DIVIDE };
+enum Controller { EQUAL, CLEAR };
 
-class Key {
+class Display {
+    public:
+        virtual void addDigit(Digit digit) = 0;
+        virtual void setSignal(Signal signal) = 0;
+        virtual void clear() = 0;
+};
+
+/*class Key {
     public:
         void press();
         void setKeyboard(Keyboard keyboard);
@@ -15,7 +25,6 @@ class Keyboard {
         void setCpu(Cpu cpu);
 };
 
-
 class Cpu {
     public:
         void receiveDigit(Digit digit);
@@ -27,16 +36,4 @@ class Calculator {
         void setDisplay(Display display);
         void setKeyboard(Keyboard keyboard);
         void setCpu(Cpu cpu);
-};
-
-int main() {
-
-    Calculator calc;
-
-    /*calc.getKeyboard().findKey('2').press();
-    calc.getKeyboard().findKey('+').press();
-    calc.getKeyboard().findKey('2').press();
-    calc.getKeyboard().findKey('=').press();*/
-
-    return 0;
-}
+};*/
