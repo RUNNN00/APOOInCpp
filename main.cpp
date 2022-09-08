@@ -1,18 +1,6 @@
 
-enum Digit { ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGTH, NINE };
-enum Signal { POSITIVE, NEGATIVE };
-enum Operator { ADD, SUBTRACT, MULTIPLY, DIVIDE };
-enum Controller { EQUAL, CLEAR };
-
-class Display {
-    public:
-        void addDigit(Digit digit);
-        void clear();
-};
-
-class DsiplayRuan : public Display {
-    // TODO fazer algoritmo do display
-};
+#include "DisplayRuan.cpp"
+#include "Enums.cpp"
 
 class Key {
     public:
