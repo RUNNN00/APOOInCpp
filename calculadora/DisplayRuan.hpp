@@ -3,14 +3,12 @@
 #include "Calculator.hpp"
 #include "Console.hpp"
 
-#define MAX_DIGIT 8
-
 class DisplayRuan : public Display
 {
 private:
     Console console;
     int digitCount;
-    Digit digits[MAX_DIGIT];
+    Digit digits[MAX_DIGITS];
     Signal signal;
 
     void refresh();

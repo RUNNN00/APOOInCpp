@@ -1,19 +1,45 @@
 #include "Calculator.hpp"
 #include "DisplayRuan.hpp"
+#include "CpuRuan.hpp"
 
-int main() {
+void testDisplay(Display& display){
+   display.setSignal(NEGATIVE);
+   display.addDigit(ZERO);
+   display.clear();
+   display.addDigit(ZERO);
+   display.addDigit(ZERO);
+   display.addDigit(ONE);
+   display.addDigit(TWO);
+   display.addDigit(THREE);
+   display.addDigit(FOUR);
+   display.addDigit(FIVE);
+   display.addDigit(ZERO);
+   display.addDigit(ONE);
+}
 
-    Display* d = new DisplayRuan();
+void testCpu(Cpu& cpu){
+  //cpu.receiveDigit(ONE);
+  cpu.receiveDigit(TWO);
+  //cpu.receiveDigit(THREE);
+  cpu.receiveOperation(ADD);
+  cpu.receiveDigit(FOUR);
+  //cpu.receiveDigit(FIVE);
+  //cpu.receiveDigit(SIX);
+  cpu.receiveOperation(EQUAL);  
+}
 
-    d->addDigit(Digit::ONE);
-    d->addDigit(Digit::ZERO);
-    d->addDigit(Digit::TWO);
-    d->addDigit(Digit::TWO);
 
-    /*calc.getKeyboard().findKey('2').press();
-    calc.getKeyboard().findKey('+').press();
-    calc.getKeyboard().findKey('2').press();
-    calc.getKeyboard().findKey('=').press();*/
+int main(){
+  /* Fase de criação */
+  /* Instancie suas implementações aqui */
+  DisplayRuan d1;
+  CpuRuan c1;
 
-    return 0;
+  /* Fase de construção/ligação */
+  c1.setDisplay(d1);
+
+  /* Fase de testes */
+  testDisplay(d1);
+  //testCpu(c1);
+
 }
