@@ -87,6 +87,7 @@ void DisplayRuan::setSignal(Signal signal)
 
 void DisplayRuan::clear()
 {
+    digitCount = 0;
     signal = POSITIVE;
     console.clear_screen();
     refresh();

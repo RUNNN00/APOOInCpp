@@ -13,10 +13,10 @@ void CpuRuan::addDigitNumB(Digit digit) {
         numB[digitCountNumB++] = digit;
 }
 
-void CpuRuan::operate(Operation operation) {
+void CpuRuan::operate() {
 
-    int a;// = getNumA();
-    int b;// = getNumB();
+    int a;// = getNumA(); remove digits
+    int b;// = getNumB(); remove digits
     int result = 0;
     switch (operation) {
         case Operation::ADD: 
@@ -33,10 +33,6 @@ void CpuRuan::operate(Operation operation) {
             break;
     }
     display->clear();
-
-    if (operation == Operation::EQUAL) {
-        this->operation = Operation::NOOP;
-    }
     // Guardar o resultado no numA
     // Mostra numA na tela
 }
@@ -44,6 +40,11 @@ void CpuRuan::operate(Operation operation) {
 void CpuRuan::receiveDigit(Digit digit) {
 
     if (operation == Operation::NOOP) {
+        addDigitNumA(digit);
+    }
+    else if (operation == Operation::EQUAL) {
+        digitCountNumA = 0;
+        display->clear();
         addDigitNumA(digit);
     }
     else {
@@ -57,8 +58,8 @@ void CpuRuan::receiveDigit(Digit digit) {
 
 void CpuRuan::receiveOperation(Operation operation) {
 
-    if (this->operation != Operation::NOOP && digitCountNumB > 0 || operation == Operation::EQUAL)
-        operate(operation);
+    if (this->operation != Operation::NOOP && digitCountNumB > 0)
+        operate();
 
     this->operation = operation;
 }

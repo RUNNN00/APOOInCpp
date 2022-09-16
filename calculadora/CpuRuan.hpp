@@ -12,7 +12,7 @@ class CpuRuan : public Cpu {
 
         void addDigitNumA(Digit);
         void addDigitNumB(Digit);
-        void operate(Operation);
+        void operate();
 
     public:
         void receiveDigit(Digit);
