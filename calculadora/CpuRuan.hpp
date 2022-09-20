@@ -10,6 +10,9 @@ class CpuRuan : public Cpu {
         char digitCountNumB;
         Operation operation;
 
+        void convertNumToDigits(int, Digit[]);
+        int setDecimalSystem(int, int, int);
+        int getNum(Digit[], int);
         void addDigitNumA(Digit);
         void addDigitNumB(Digit);
         void operate();
