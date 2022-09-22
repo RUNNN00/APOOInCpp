@@ -1,59 +1,33 @@
 #include "CpuRuan.hpp"
 #include "Calculator.hpp"
 
-void CpuRuan::convertNumToDigits(int num, Digit digits[]) {
+#include <stdio.h>
 
-    int aux = num;
-    int j = 1;
-    for (int i = MAX_DIGITS - 1; i >= 0; i--) {
-        aux = num / j % 10;
-        j *= 10;
+CpuRuan::CpuRuan() {
+    operation = Operation::NOOP;
+    digitCountNumA = 0;
+    digitCountNumB = 0;
+}
+
+int CpuRuan::digitToInt(Digit digit) {
+
+    switch (digit) {
+        case Digit::ZERO: return 0; break;
+        case Digit::ONE: return 1; break;
+        case Digit::TWO: return 2; break;
+        case Digit::THREE: return 3; break;
+        case Digit::FOUR: return 4; break;
+        case Digit::FIVE: return 5; break;
+        case Digit::SIX: return 6; break;
+        case Digit::SEVEN: return 7; break;
+        case Digit::EIGTH: return 8; break;
+        case Digit::NINE: return 9; break;
+        default: return 0; // TODO exception...
     }
 }
 
-int CpuRuan::setDecimalSystem(int index, int digit, int size) {
+Digit CpuRuan::intToDigit(int n) {
 
-    int aux = size - index;
-    switch (aux) {
-        case 2:
-        return digit * 10;
-        case 3:
-        return digit * 100;
-        case 4:
-        return digit * 1000;
-        case 5:
-        return digit * 10000;
-        case 6:
-        return digit * 100000;
-        case 7:
-        return digit * 1000000;
-        case 8:
-        return digit * 10000000;
-        default:
-        return digit;
-    }
-}
-
-int CpuRuan::getNum(Digit numVet[], int size) {
-
-    int num = 0;
-    for (int i = 0; i < size; i++) {
-        int aux = 0;
-        switch (numVet[i]) {
-            case Digit::ZERO: aux = 0; break;
-            case Digit::ONE: aux = 1; break;
-            case Digit::TWO: aux = 2; break;
-            case Digit::THREE: aux = 3; break;
-            case Digit::FOUR: aux = 4; break;
-            case Digit::FIVE: aux = 5; break;
-            case Digit::SIX: aux = 6; break;
-            case Digit::SEVEN: aux = 7; break;
-            case Digit::EIGTH: aux = 8; break;
-            default: aux = 0;
-        }
-        num += setDecimalSystem(i, aux, size);
-    }
-    return num;
 }
 
 void CpuRuan::addDigitNumA(Digit digit) {
@@ -68,15 +42,23 @@ void CpuRuan::addDigitNumB(Digit digit) {
         numB[digitCountNumB++] = digit;
 }
 
+int CpuRuan::getOperand(Digit digits[], int count) {
+
+    int acc = 0;
+    for (int i = 0; i < count; i++) {
+        acc *= 10;
+        acc += digitToInt(digits[i]);
+    }
+    return acc;
+}
+
 void CpuRuan::operate() {
 
-    int a = getNum(numA, digitCountNumA);
-    digitCountNumA = 0;
-    int b = getNum(numB, digitCountNumB);
-    digitCountNumB = 0;
+    int a = getOperand(numA, digitCountNumA);
+    int b = getOperand(numB, digitCountNumB);
     int result = 0;
     switch (operation) {
-        case Operation::ADD: 
+        case Operation::ADD:
             result = a + b;
             break;
         case Operation::SUBTRACT:
@@ -89,9 +71,13 @@ void CpuRuan::operate() {
             result = a / b;
             break;
     }
-    display->clear();
-    convertNumToDigits(result, numA);
+
+    // converter o resultado para digits na numA
+    // limpar tela
     // Mostra numA na tela
+    printf("a: %d\n", a);
+    printf("b: %d\n", b);
+    printf("result: %d\n", result);
 }
 
 void CpuRuan::receiveDigit(Digit digit) {

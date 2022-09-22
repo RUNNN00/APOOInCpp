@@ -2,7 +2,8 @@
 #include "DisplayRuan.hpp"
 #include "CpuRuan.hpp"
 
-void testDisplay(Display& display){
+void testDisplay(Display& display) {
+   
    display.setSignal(NEGATIVE);
    display.addDigit(ZERO);
    display.clear();
@@ -17,14 +18,18 @@ void testDisplay(Display& display){
    display.addDigit(ONE);
 }
 
-void testCpu(Cpu& cpu){
-  //cpu.receiveDigit(ONE);
+void testCpu(Cpu& cpu) {
+
+  cpu.receiveDigit(ONE);
   cpu.receiveDigit(TWO);
-  //cpu.receiveDigit(THREE);
+  cpu.receiveDigit(THREE);
+
   cpu.receiveOperation(ADD);
+
   cpu.receiveDigit(FOUR);
-  //cpu.receiveDigit(FIVE);
-  //cpu.receiveDigit(SIX);
+  cpu.receiveDigit(FIVE);
+  cpu.receiveDigit(SIX);
+
   cpu.receiveOperation(EQUAL);  
 }
 
