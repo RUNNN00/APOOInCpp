@@ -9,10 +9,11 @@ class CpuRuan : public Cpu {
         char digitCountNumA;
         char digitCountNumB;
         Operation operation;
-
+        
         int digitToInt(Digit);
         Digit intToDigit(int);
         int getOperand(Digit[], int);
+        void setExpressionInNumA(int);
         void addDigitNumA(Digit);
         void addDigitNumB(Digit);
         void operate();

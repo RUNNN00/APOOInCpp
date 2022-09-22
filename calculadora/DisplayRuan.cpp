@@ -69,6 +69,14 @@ void DisplayRuan::refresh()
     printf("\n");
 }
 
+void DisplayRuan::showDigits(Digit digits[], int count) {
+    
+    clear();
+    for (int i = 0; i < count; i++) {
+        addDigit(digits[i]);
+    }
+}
+
 void DisplayRuan::addDigit(Digit digit)
 {
     if (digitCount <= MAX_DIGITS)

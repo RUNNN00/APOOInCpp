@@ -15,7 +15,8 @@ private:
 public:
     DisplayRuan();
     ~DisplayRuan();
-    void addDigit(Digit digit);
-    void setSignal(Signal signal);
+    void showDigits(Digit[], int);
+    void addDigit(Digit);
+    void setSignal(Signal);
     void clear();
 };

@@ -1,7 +1,7 @@
+#include <math.h>
+
 #include "CpuRuan.hpp"
 #include "Calculator.hpp"
-
-#include <stdio.h>
 
 CpuRuan::CpuRuan() {
     operation = Operation::NOOP;
@@ -28,6 +28,19 @@ int CpuRuan::digitToInt(Digit digit) {
 
 Digit CpuRuan::intToDigit(int n) {
 
+    switch (n) {
+        case 0: return Digit::ZERO; break;
+        case 1: return Digit::ONE; break;
+        case 2: return Digit::TWO; break;
+        case 3: return Digit::THREE; break;
+        case 4: return Digit::FOUR; break;
+        case 5: return Digit::FIVE; break;
+        case 6: return Digit::SIX; break;
+        case 7: return Digit::SEVEN; break;
+        case 8: return Digit::EIGTH; break;
+        case 9: return Digit::NINE; break;
+        default: return Digit::ZERO;
+    }
 }
 
 void CpuRuan::addDigitNumA(Digit digit) {
@@ -52,10 +65,30 @@ int CpuRuan::getOperand(Digit digits[], int count) {
     return acc;
 }
 
+void CpuRuan::setExpressionInNumA(int expression) {
+
+    int num[MAX_DIGITS];
+    int decimal = (int) pow(10, MAX_DIGITS - 1);
+    for (int i = 0; i < MAX_DIGITS; i++) {
+        num[i] = expression / decimal % 10;
+        decimal /= 10;
+    }
+
+    int i = 0;
+    while (num[i] == 0) { i++; }
+    int count = MAX_DIGITS - i;
+    for (int j = 0; j < count; j++) {
+        addDigitNumA(intToDigit(num[i]));
+        i++;
+    }
+}
+
 void CpuRuan::operate() {
 
     int a = getOperand(numA, digitCountNumA);
     int b = getOperand(numB, digitCountNumB);
+    digitCountNumA = 0;
+    digitCountNumB = 0;
     int result = 0;
     switch (operation) {
         case Operation::ADD:
@@ -71,13 +104,8 @@ void CpuRuan::operate() {
             result = a / b;
             break;
     }
-
-    // converter o resultado para digits na numA
-    // limpar tela
-    // Mostra numA na tela
-    printf("a: %d\n", a);
-    printf("b: %d\n", b);
-    printf("result: %d\n", result);
+    setExpressionInNumA(result);
+    display->showDigits(numA, digitCountNumA);
 }
 
 void CpuRuan::receiveDigit(Digit digit) {
@@ -95,7 +123,6 @@ void CpuRuan::receiveDigit(Digit digit) {
             display->clear();
         addDigitNumB(digit);
     }
-
     display->addDigit(digit);
 }
 
