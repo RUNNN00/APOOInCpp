@@ -4,6 +4,15 @@
 #include "Calculator.hpp"
 
 CpuRuan::CpuRuan() {
+
+    operation = Operation::NOOP;
+    digitCountNumA = 0;
+    digitCountNumB = 0;
+}
+
+CpuRuan::CpuRuan(Display& display) {
+
+    setDisplay(display);
     operation = Operation::NOOP;
     digitCountNumA = 0;
     digitCountNumB = 0;
@@ -132,6 +141,10 @@ void CpuRuan::receiveOperation(Operation operation) {
         operate();
 
     this->operation = operation;
+}
+
+void CpuRuan::receiveControl(Control control) {
+    // TODO switch controls behaviour
 }
 
 void CpuRuan::setDisplay(Display& display) {

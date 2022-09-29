@@ -20,7 +20,9 @@ class CpuRuan : public Cpu {
 
     public:
         CpuRuan();
+        CpuRuan(Display&);
         void receiveDigit(Digit);
         void receiveOperation(Operation);
+        void receiveControl(Control);
         void setDisplay(Display&);
 };
