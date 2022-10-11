@@ -16,7 +16,7 @@ class CpuRuan : public Cpu {
         void setExpressionInNumA(int);
         void addDigitNumA(Digit);
         void addDigitNumB(Digit);
-        void operate();
+        int operate();
 
     public:
         CpuRuan();

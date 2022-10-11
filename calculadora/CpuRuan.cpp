@@ -92,7 +92,7 @@ void CpuRuan::setExpressionInNumA(int expression) {
     }
 }
 
-void CpuRuan::operate() {
+int CpuRuan::operate() {
 
     int a = getOperand(numA, digitCountNumA);
     int b = getOperand(numB, digitCountNumB);
@@ -113,8 +113,7 @@ void CpuRuan::operate() {
             result = a / b;
             break;
     }
-    setExpressionInNumA(result);
-    display->showDigits(numA, digitCountNumA);
+    return result;
 }
 
 void CpuRuan::receiveDigit(Digit digit) {
@@ -137,9 +136,10 @@ void CpuRuan::receiveDigit(Digit digit) {
 
 void CpuRuan::receiveOperation(Operation operation) {
 
-    if (this->operation != Operation::NOOP && digitCountNumB > 0)
-        operate();
-
+    if (this->operation != Operation::NOOP && digitCountNumB > 0) {
+        setExpressionInNumA(operate());
+        display->showDigits(numA, digitCountNumA);
+    }
     this->operation = operation;
 }
 

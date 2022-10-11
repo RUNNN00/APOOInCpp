@@ -1,9 +1,10 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 #include "DisplayRuan.hpp"
 
-DisplayRuan::DisplayRuan() {
-
+DisplayRuan::DisplayRuan()
+{
     console.init(0, 0);
     clear();
 }
@@ -12,77 +13,93 @@ DisplayRuan::~DisplayRuan() {}
 
 void DisplayRuan::refresh()
 {
-    if (signal == NEGATIVE)
+    console.clear_screen();
+    console.set_cursor(0, 0);
+    printf("████████████\n");
+    printf("█");
+    console.set_color(Color::FG_Green);
+
+    if (signal == Signal::NEGATIVE)
         printf("-");
     else
         printf(" ");
 
-    for (int i = 1; i <= digitCount; i++)
+    for (int i = 0; i < digitCount; i++)
     {
-        switch (digits[i - 1])
+        switch (digits[i])
         {
         case ZERO:
-            console.set_cursor(1, 1 + i);
             printf("0");
             break;
         case ONE:
-            console.set_cursor(1, 1 + i);
             printf("1");
             break;
         case TWO:
-            console.set_cursor(1, 1 + i);
             printf("2");
             break;
         case THREE:
-            console.set_cursor(1, 1 + i);
             printf("3");
             break;
         case FOUR:
-            console.set_cursor(1, 1 + i);
             printf("4");
             break;
         case FIVE:
-            console.set_cursor(1, 1 + i);
             printf("5");
             break;
         case SIX:
-            console.set_cursor(1, 1 + i);
             printf("6");
             break;
         case SEVEN:
-            console.set_cursor(1, 1 + i);
             printf("7");
             break;
         case EIGTH:
-            console.set_cursor(1, 1 + i);
             printf("8");
             break;
         case NINE:
-            console.set_cursor(1, 1 + i);
             printf("9");
             break;
         default:
             printf("?");
             break;
         }
+
+        if (i == decimalPosition)
+            printf(".");
     }
-    printf("\n");
+    console.reset_color();
+    printf("█\n");
+    printf("████████████\n");
 }
 
-void DisplayRuan::showDigits(Digit digits[], int count) {
-    
+void DisplayRuan::showDigits(Digit digits[], int count)
+{
     clear();
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < count; i++)
+    {
         addDigit(digits[i]);
     }
 }
 
 void DisplayRuan::addDigit(Digit digit)
 {
-    if (digitCount <= MAX_DIGITS)
+    if (digitCount < MAX_DIGITS)
     {
+        if (digitCount < 1 && digit == Digit::ZERO)
+            return;
+
         digits[digitCount++] = digit;
         refresh();
+    }
+}
+
+void DisplayRuan::setDecimal()
+{
+    if (decimalPosition == MAX_DIGITS)
+    {
+        if (digitCount < 1)
+            digits[digitCount++] = Digit::ZERO;
+
+        decimalPosition = digitCount - 1;
     }
 }
 
@@ -90,13 +107,12 @@ void DisplayRuan::setSignal(Signal signal)
 {
     if (digitCount < 1)
         this->signal = signal;
-    refresh();
 }
 
 void DisplayRuan::clear()
 {
+    decimalPosition = MAX_DIGITS;
     digitCount = 0;
-    signal = POSITIVE;
-    console.clear_screen();
+    signal = Signal::POSITIVE;
     refresh();
 }

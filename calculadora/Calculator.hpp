@@ -11,6 +11,7 @@ class Display {
     public:
         virtual void showDigits(Digit[], int) = 0;
         virtual void addDigit(Digit) = 0;
+        virtual void setDecimal() = 0;
         virtual void setSignal(Signal) = 0;
         virtual void clear() = 0;
 };
