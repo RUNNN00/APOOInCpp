@@ -71,11 +71,13 @@ void DisplayRuan::refresh()
     printf("████████████\n");
 }
 
-void DisplayRuan::showDigits(Digit digits[], int count)
+void DisplayRuan::showDigits(Digit digits[], int count, int decimalPos)
 {
     clear();
     for (int i = 0; i < count; i++)
     {
+        if (i == decimalPos)
+            setDecimal();
         addDigit(digits[i]);
     }
 }

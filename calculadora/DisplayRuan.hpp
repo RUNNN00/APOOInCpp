@@ -15,7 +15,7 @@ private:
 public:
     DisplayRuan();
     ~DisplayRuan();
-    void showDigits(Digit[], int);
+    void showDigits(Digit[], int, int);
     void addDigit(Digit);
     void setDecimal();
     void setSignal(Signal);

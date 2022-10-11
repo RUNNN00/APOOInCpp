@@ -74,31 +74,13 @@ int CpuRuan::getOperand(Digit digits[], int count) {
     return acc;
 }
 
-void CpuRuan::setExpressionInNumA(int expression) {
+float CpuRuan::operate() {
 
-    int num[MAX_DIGITS];
-    int decimal = (int) pow(10, MAX_DIGITS - 1);
-    for (int i = 0; i < MAX_DIGITS; i++) {
-        num[i] = expression / decimal % 10;
-        decimal /= 10;
-    }
-
-    int i = 0;
-    while (num[i] == 0) { i++; }
-    int count = MAX_DIGITS - i;
-    for (int j = 0; j < count; j++) {
-        addDigitNumA(intToDigit(num[i]));
-        i++;
-    }
-}
-
-int CpuRuan::operate() {
-
-    int a = getOperand(numA, digitCountNumA);
-    int b = getOperand(numB, digitCountNumB);
+    float a = getOperand(numA, digitCountNumA);
+    float b = getOperand(numB, digitCountNumB);
     digitCountNumA = 0;
     digitCountNumB = 0;
-    int result = 0;
+    float result = 0;
     switch (operation) {
         case Operation::ADD:
             result = a + b;
@@ -118,33 +100,14 @@ int CpuRuan::operate() {
 
 void CpuRuan::receiveDigit(Digit digit) {
 
-    if (operation == Operation::NOOP) {
-        addDigitNumA(digit);
-    }
-    else if (operation == Operation::EQUAL) {
-        digitCountNumA = 0;
-        display->clear();
-        addDigitNumA(digit);
-    }
-    else {
-        if (digitCountNumB == 0)
-            display->clear();
-        addDigitNumB(digit);
-    }
-    display->addDigit(digit);
 }
 
 void CpuRuan::receiveOperation(Operation operation) {
 
-    if (this->operation != Operation::NOOP && digitCountNumB > 0) {
-        setExpressionInNumA(operate());
-        display->showDigits(numA, digitCountNumA);
-    }
-    this->operation = operation;
 }
 
 void CpuRuan::receiveControl(Control control) {
-    // TODO switch controls behaviour
+    
 }
 
 void CpuRuan::setDisplay(Display& display) {

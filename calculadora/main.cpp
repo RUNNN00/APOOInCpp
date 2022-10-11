@@ -33,13 +33,15 @@ void testCpu(Cpu& cpu) {
   cpu.receiveDigit(TWO);
   cpu.receiveDigit(THREE);
 
-  cpu.receiveOperation(ADD);
+  //cpu.receiveOperation(ADD);
+  cpu.receiveOperation(DIVIDE);
 
-  cpu.receiveDigit(FOUR);
-  cpu.receiveDigit(FIVE);
-  cpu.receiveDigit(SIX);
+  //cpu.receiveDigit(FOUR);
+  //cpu.receiveDigit(FIVE);
+  //cpu.receiveDigit(SIX);
+  cpu.receiveDigit(TWO);
 
-  cpu.receiveOperation(EQUAL);  
+  cpu.receiveOperation(EQUAL);
 }
 
 void testKeyboard(Keyboard& keyboard) {
@@ -59,7 +61,7 @@ void testKeyboard(Keyboard& keyboard) {
 int main(){
   /* Fase de criação */
   DisplayRuan display;
-  /*CpuRuan cpu{display};
+  CpuRuan cpu{display};
   KeyboardRuan keyboard{cpu};
 
   KeyDigitRuan zero{Digit::ZERO};
@@ -80,12 +82,13 @@ int main(){
   KeyOperationRuan equal{Operation::EQUAL};
 
   /* Fase de construção/ligação */
-  /*keyboard.addKey(zero);
+  keyboard.addKey(zero);
   keyboard.addKey(one);
   keyboard.addKey(addition);
   keyboard.addKey(equal);
 
   /* Fase de testes */
   //testKeyboard(keyboard);
-  testDisplay(display);
+  //testDisplay(display);
+  testCpu(cpu);
 }

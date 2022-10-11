@@ -5,11 +5,11 @@
 enum Digit { ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGTH, NINE };
 enum Signal { POSITIVE, NEGATIVE };
 enum Operation { ADD, SUBTRACT, MULTIPLY, DIVIDE, EQUAL, NOOP };
-enum Control { OFF, CLEAR, MEMORY_READ_CLEAR, MEMORY_SUBTRACTION, MEMORY_ADDITION };
+enum Control { OFF, CLEAR, MEMORY_READ_CLEAR, MEMORY_SUBTRACTION, MEMORY_ADDITION, DECIMAL_SEPARATOR };
 
 class Display {
     public:
-        virtual void showDigits(Digit[], int) = 0;
+        virtual void showDigits(Digit[], int, int) = 0;
         virtual void addDigit(Digit) = 0;
         virtual void setDecimal() = 0;
         virtual void setSignal(Signal) = 0;
