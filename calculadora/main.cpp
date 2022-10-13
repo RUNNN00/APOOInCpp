@@ -30,18 +30,18 @@ void testDisplay(Display& display) {
 void testCpu(Cpu& cpu) {
 
   cpu.receiveDigit(ONE);
-  cpu.receiveDigit(TWO);
-  cpu.receiveDigit(THREE);
+  //cpu.receiveDigit(TWO);
+  //cpu.receiveDigit(THREE);
 
   //cpu.receiveOperation(ADD);
-  cpu.receiveOperation(DIVIDE);
+  cpu.receiveOperation(ADD);
 
   //cpu.receiveDigit(FOUR);
   //cpu.receiveDigit(FIVE);
   //cpu.receiveDigit(SIX);
   cpu.receiveDigit(TWO);
 
-  cpu.receiveOperation(EQUAL);
+  cpu.receiveControl(EQUAL);
 }
 
 void testKeyboard(Keyboard& keyboard) {
@@ -79,13 +79,11 @@ int main(){
   KeyOperationRuan subtraction{Operation::SUBTRACT};
   KeyOperationRuan multiplication{Operation::MULTIPLY};
   KeyOperationRuan divide{Operation::DIVIDE};
-  KeyOperationRuan equal{Operation::EQUAL};
 
   /* Fase de construção/ligação */
   keyboard.addKey(zero);
   keyboard.addKey(one);
   keyboard.addKey(addition);
-  keyboard.addKey(equal);
 
   /* Fase de testes */
   //testKeyboard(keyboard);

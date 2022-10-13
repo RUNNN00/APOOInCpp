@@ -12,15 +12,16 @@ class CpuRuan : public Cpu {
         int digitToInt(Digit);
         Digit intToDigit(int);
         int getOperand(Digit[], int);
+        void setOperand(float);
         void addDigitNumA(Digit);
         void addDigitNumB(Digit);
-        float operate();
+        void operate();
 
     public:
         CpuRuan();
         CpuRuan(Display&);
+        void setDisplay(Display&);
         void receiveDigit(Digit);
         void receiveOperation(Operation);
         void receiveControl(Control);
-        void setDisplay(Display&);
 };

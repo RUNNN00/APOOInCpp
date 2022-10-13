@@ -57,7 +57,6 @@ char KeyOperationRuan::getSymbol() {
         case Operation::SUBTRACT: return '-';
         case Operation::MULTIPLY: return '*';
         case Operation::DIVIDE: return '/';
-        case Operation::EQUAL: return '=';
         case Operation::NOOP: return ' ';
         default: return ' ';
     }
