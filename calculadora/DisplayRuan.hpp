@@ -12,6 +12,7 @@ private:
     Digit digits[MAX_DIGITS];
     Signal signal;
     void refresh();
+    void showDigitShape(const char*, const char*, const char*, const char*, unsigned char);
 public:
     DisplayRuan();
     ~DisplayRuan();

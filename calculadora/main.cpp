@@ -31,7 +31,8 @@ void testCpu(Cpu& cpu) {
 
   cpu.receiveDigit(ONE);
   cpu.receiveDigit(TWO);
-  //cpu.receiveDigit(THREE);
+  //cpu.receiveDigit(TWO);
+  cpu.receiveDigit(THREE);
 
   //cpu.receiveOperation(ADD);
   cpu.receiveOperation(DIVIDE);

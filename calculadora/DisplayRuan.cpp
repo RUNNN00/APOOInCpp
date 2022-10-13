@@ -15,60 +15,98 @@ void DisplayRuan::refresh()
 {
     console.clear_screen();
     console.set_cursor(0, 0);
-    printf("████████████\n");
-    printf("█");
     console.set_color(Color::FG_Green);
 
     if (signal == Signal::NEGATIVE)
-        printf("-");
+        printf(" ▃▃ ");
     else
-        printf(" ");
+        printf("    ");
+
 
     for (int i = 0; i < digitCount; i++)
     {
         switch (digits[i])
         {
         case ZERO:
-            printf("0");
+            showDigitShape("████",
+                           "█  █",
+                           "█  █",
+                           "████", i);
             break;
         case ONE:
-            printf("1");
+            showDigitShape("  █ ",
+                           " ██ ",
+                           "  █ ",
+                           "████", i);
             break;
         case TWO:
-            printf("2");
+            showDigitShape("████",
+                           "  ▄█",
+                           "█▀  ",
+                           "████", i);
             break;
         case THREE:
-            printf("3");
+            showDigitShape("▀▀▀█",
+                           " ▄█ ",
+                           "   █",
+                           "████", i);
             break;
         case FOUR:
-            printf("4");
+            showDigitShape(" █ █",
+                           " █ █",
+                           "████",
+                           "   █", i);
             break;
         case FIVE:
-            printf("5");
+            showDigitShape("████",
+                           "█   ",
+                           " ▀▀█",
+                           "████", i);
             break;
         case SIX:
-            printf("6");
+            showDigitShape(" ███",
+                           "█   ",
+                           "█▀▀█",
+                           "████", i);
             break;
         case SEVEN:
-            printf("7");
+            showDigitShape("████",
+                           "   █",
+                           " ██ ",
+                           "█   ", i);
             break;
         case EIGTH:
-            printf("8");
+            showDigitShape("████",
+                           "█▄▄█",
+                           "█  █",
+                           "████", i);
             break;
         case NINE:
-            printf("9");
+            showDigitShape("████",
+                           "█▄▄█",
+                           "   █",
+                           "███ ", i);
             break;
         default:
-            printf("?");
+            showDigitShape("█  █",
+                           " ██ ",
+                           " █  ",
+                           "█  █", i);
             break;
         }
-
-        if (i == decimalPosition)
-            printf(".");
     }
     console.reset_color();
-    printf("█\n");
-    printf("████████████\n");
+}
+
+void DisplayRuan::showDigitShape(const char * line1, const char * line2, const char * line3, const char * line4, unsigned char column){
+    console.set_cursor(1, (MAX_DIGITS - digitCount + 1 + column) * 6);printf(line1);
+    console.set_cursor(2, (MAX_DIGITS - digitCount + 1 + column) * 6);printf(line2);
+    console.set_cursor(3, (MAX_DIGITS - digitCount + 1 + column) * 6);printf(line3);
+    console.set_cursor(4, (MAX_DIGITS - digitCount + 1 + column) * 6);printf(line4);
+
+    if (decimalPosition == column) {
+        console.set_cursor(4, (MAX_DIGITS - digitCount + 1 + column) * 6 + 4);printf("▗");
+    }
 }
 
 void DisplayRuan::showDigits(Digit digits[], int count, int decimalPos)
