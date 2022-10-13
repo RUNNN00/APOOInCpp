@@ -1,5 +1,4 @@
 #include <math.h>
-#include<stdio.h> // temp
 
 #include "CpuRuan.hpp"
 #include "Calculator.hpp"
@@ -8,6 +7,8 @@ CpuRuan::CpuRuan() {
     operation = Operation::NOOP;
     digitCountNumA = 0;
     digitCountNumB = 0;
+    decimalPositionA = MAX_DIGITS;
+    decimalPositionB = MAX_DIGITS;
 }
 
 CpuRuan::CpuRuan(Display &display) {
@@ -15,6 +16,8 @@ CpuRuan::CpuRuan(Display &display) {
     operation = Operation::NOOP;
     digitCountNumA = 0;
     digitCountNumB = 0;
+    decimalPositionA = MAX_DIGITS;
+    decimalPositionB = MAX_DIGITS;
 }
 
 void CpuRuan::setDisplay(Display &display) {
@@ -82,8 +85,8 @@ void CpuRuan::operate() {
         result = a / b;
         break;
     }
-    setOperand(result);
-    display->showDigits(numA, digitCountNumA, MAX_DIGITS - 1);
+    setExpressionInDigit(result);
+    display->showDigits(numA, digitCountNumA, decimalPositionA);
 }
 
 int CpuRuan::getOperand(Digit digits[], int count) {
@@ -95,26 +98,40 @@ int CpuRuan::getOperand(Digit digits[], int count) {
     return acc;
 }
 
-void CpuRuan::setOperand(float expression) {
+void CpuRuan::setExpressionInDigit(float expression) {
 
     // separa os algarismos da expressão.
     // exemplo: 123
     // [0, 0, 0, 0, 0, 1, 2, 3]
     int num[MAX_DIGITS];
-    int decimal = 10000000;
+    int decimalMultiplier = 10000000;
     for (int i = 0; i < MAX_DIGITS; i++) {
-        num[i] = (int)expression / decimal % 10;
-        decimal /= 10;
+        num[i] = (int)expression / decimalMultiplier % 10;
+        decimalMultiplier /= 10;
     }
 
     // procura o primeiro algarismo diferente de 0.
     // converte os algrismos em digitos.
     int i = 0;
     while(num[i] == 0) { i++; }
-    int count = MAX_DIGITS - i;
-    for (int j = 0; j < count; j++) {
+    int countInt = MAX_DIGITS - i;
+    for (int j = 0; j < countInt; j++) {
         addDigitNumA(intToDigit(num[i]));
         i++;
+    }
+
+    // checa se expressao tem parte flutuante
+    // adiciona parte flutuante
+    float floating = expression - floor(expression);
+    if (floating != 0) {
+        decimalPositionA = digitCountNumA; // define posicao do ponto flutuante
+        float decimalDivider = 10;
+        int countFloat = MAX_DIGITS - digitCountNumA;
+        for (int k = 0; k < countFloat; k++) {
+            int n = (int)(floating * decimalDivider) % 10;
+            addDigitNumA(intToDigit(n));
+            decimalDivider *= 10;
+        }
     }
 }
 

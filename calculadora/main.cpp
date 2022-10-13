@@ -30,11 +30,11 @@ void testDisplay(Display& display) {
 void testCpu(Cpu& cpu) {
 
   cpu.receiveDigit(ONE);
-  //cpu.receiveDigit(TWO);
+  cpu.receiveDigit(TWO);
   //cpu.receiveDigit(THREE);
 
   //cpu.receiveOperation(ADD);
-  cpu.receiveOperation(ADD);
+  cpu.receiveOperation(DIVIDE);
 
   //cpu.receiveDigit(FOUR);
   //cpu.receiveDigit(FIVE);

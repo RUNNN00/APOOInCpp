@@ -8,11 +8,13 @@ class CpuRuan : public Cpu {
         Digit numB[MAX_DIGITS];
         char digitCountNumA;
         char digitCountNumB;
+        char decimalPositionA;
+        char decimalPositionB;
         Operation operation;
         int digitToInt(Digit);
         Digit intToDigit(int);
         int getOperand(Digit[], int);
-        void setOperand(float);
+        void setExpressionInDigit(float);
         void addDigitNumA(Digit);
         void addDigitNumB(Digit);
         void operate();
