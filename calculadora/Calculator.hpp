@@ -24,6 +24,7 @@ class Cpu {
         virtual void receiveOperation(Operation) = 0;
         virtual void receiveControl(Control) = 0;
         virtual void setDisplay(Display&) = 0;
+        virtual void setDecimal() = 0;
 };
 
 class Keyboard;

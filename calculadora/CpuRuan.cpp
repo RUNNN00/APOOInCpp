@@ -1,4 +1,5 @@
 #include <math.h>
+#include<stdio.h> // temp
 
 #include "CpuRuan.hpp"
 #include "Calculator.hpp"
@@ -55,6 +56,29 @@ void CpuRuan::receiveControl(Control control) {
     }
 }
 
+void CpuRuan::setDecimal() {
+    if (operation == Operation::NOOP) {
+        if (decimalPositionA == MAX_DIGITS) {
+            if (digitCountNumA == 0) {
+                addDigitNumA(Digit::ZERO);
+                display->addDigit(Digit::ZERO);
+            }
+
+            decimalPositionA = digitCountNumA - 1;
+            display->setDecimal();
+        }
+    }
+    else if (decimalPositionB == MAX_DIGITS) {
+        if (digitCountNumB == 0) {
+            addDigitNumB(Digit::ZERO);
+            display->addDigit(Digit::ZERO);
+        }
+
+        decimalPositionB = digitCountNumB - 1;
+        display->setDecimal();
+    }
+}
+
 void CpuRuan::addDigitNumA(Digit digit) {
     if (digitCountNumA < MAX_DIGITS)
         numA[digitCountNumA++] = digit;
@@ -66,8 +90,8 @@ void CpuRuan::addDigitNumB(Digit digit) {
 }
 
 void CpuRuan::operate() {
-    float a = getOperand(numA, digitCountNumA);
-    float b = getOperand(numB, digitCountNumB);
+    float a = getOperand(numA, digitCountNumA, decimalPositionA);
+    float b = getOperand(numB, digitCountNumB, decimalPositionB);
     digitCountNumA = 0;
     digitCountNumB = 0;
     float result = 0;
@@ -85,17 +109,34 @@ void CpuRuan::operate() {
         result = a / b;
         break;
     }
+    printf("result: %.2f\n", result);
     setExpressionInDigit(result);
-    display->showDigits(numA, digitCountNumA, decimalPositionA);
+    //display->showDigits(numA, digitCountNumA, decimalPositionA);
 }
 
-int CpuRuan::getOperand(Digit digits[], int count) {
-    int acc = 0;
-    for (int i = 0; i < count; i++) {
-        acc *= 10;
-        acc += digitToInt(digits[i]);
+float CpuRuan::getOperand(Digit digits[], int count, int decimalPosition) {
+
+    float floating = 0;
+    int integer = 0;
+
+    // verifica se os digitos representam um numero flutuante
+    if (decimalPosition < count - 1) {
+        // converte a parte flutuante de digito para numérico
+        int divider = 10;
+        for (int i = decimalPosition + 1; i < count; i++) {
+            floating = digits[i] / divider;
+            divider *= 10;
+        }
+        count = decimalPosition + 1;
     }
-    return acc;
+
+    // converte a parte inteira de digito para numérico
+    for (int i = 0; i < count; i++) {
+        integer *= 10;
+        integer += digitToInt(digits[i]);
+    }
+
+    return (float)integer + floating;
 }
 
 void CpuRuan::setExpressionInDigit(float expression) {
@@ -113,7 +154,7 @@ void CpuRuan::setExpressionInDigit(float expression) {
     // procura o primeiro algarismo diferente de 0.
     // converte os algrismos em digitos.
     int i = 0;
-    while(num[i] == 0) { i++; }
+    while(num[i] == 0 && i < MAX_DIGITS) { i++; }
     int countInt = MAX_DIGITS - i;
     for (int j = 0; j < countInt; j++) {
         addDigitNumA(intToDigit(num[i]));
@@ -125,6 +166,7 @@ void CpuRuan::setExpressionInDigit(float expression) {
     float floating = expression - floor(expression);
     if (floating != 0) {
         decimalPositionA = digitCountNumA; // define posicao do ponto flutuante
+        printf("%d\n", decimalPositionA);
         float decimalDivider = 10;
         int countFloat = MAX_DIGITS - digitCountNumA;
         for (int k = 0; k < countFloat; k++) {

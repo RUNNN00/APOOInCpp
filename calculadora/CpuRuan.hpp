@@ -13,7 +13,7 @@ class CpuRuan : public Cpu {
         Operation operation;
         int digitToInt(Digit);
         Digit intToDigit(int);
-        int getOperand(Digit[], int);
+        float getOperand(Digit[], int, int);
         void setExpressionInDigit(float);
         void addDigitNumA(Digit);
         void addDigitNumB(Digit);
@@ -26,4 +26,5 @@ class CpuRuan : public Cpu {
         void receiveDigit(Digit);
         void receiveOperation(Operation);
         void receiveControl(Control);
+        void setDecimal();
 };

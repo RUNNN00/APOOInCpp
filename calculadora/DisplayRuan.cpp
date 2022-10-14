@@ -22,15 +22,15 @@ void DisplayRuan::refresh()
     else
         printf("    ");
 
-    for (int i = digitCount - 1; i >= 0; i--)
-    {
-        switch (digits[i])
-        {
+    for (int i = 0; i < digitCount; i++) {
+        switch (digits[i]) {
         case ZERO:
-            showDigitShape("████",
-                           "█  █",
-                           "█  █",
-                           "████", i);
+            if (digitCount > 1) {
+                showDigitShape("████",
+                               "█  █",
+                               "█  █",
+                               "████", i);
+            }
             break;
         case ONE:
             showDigitShape("  █ ",
@@ -123,9 +123,6 @@ void DisplayRuan::addDigit(Digit digit)
 {
     if (digitCount < MAX_DIGITS)
     {
-        if (digitCount < 1 && digit == Digit::ZERO)
-            return;
-
         digits[digitCount++] = digit;
         refresh();
     }
@@ -133,13 +130,7 @@ void DisplayRuan::addDigit(Digit digit)
 
 void DisplayRuan::setDecimal()
 {
-    if (decimalPosition == MAX_DIGITS)
-    {
-        if (digitCount < 1)
-            digits[digitCount++] = Digit::ZERO;
-
-        decimalPosition = digitCount - 1;
-    }
+    decimalPosition = digitCount - 1;
 }
 
 void DisplayRuan::setSignal(Signal signal)
