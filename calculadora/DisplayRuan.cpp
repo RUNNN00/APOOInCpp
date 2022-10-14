@@ -22,8 +22,7 @@ void DisplayRuan::refresh()
     else
         printf("    ");
 
-
-    for (int i = 0; i < digitCount; i++)
+    for (int i = digitCount - 1; i >= 0; i--)
     {
         switch (digits[i])
         {

@@ -132,6 +132,14 @@ void CpuRuan::setExpressionInDigit(float expression) {
             addDigitNumA(intToDigit(n));
             decimalDivider *= 10;
         }
+
+        // desconsidera os zeros à direita da parte flutuante
+        for (int n = digitCountNumA - 1; n >= 0; n--) {
+            if (numA[n] != Digit::ZERO) {
+                digitCountNumA = n + 1;
+                break;
+            }
+        }
     }
 }
 
