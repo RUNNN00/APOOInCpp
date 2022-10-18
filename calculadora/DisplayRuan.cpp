@@ -25,12 +25,10 @@ void DisplayRuan::refresh()
     for (int i = 0; i < digitCount; i++) {
         switch (digits[i]) {
         case ZERO:
-            if (digitCount > 1) {
-                showDigitShape("████",
-                               "█  █",
-                               "█  █",
-                               "████", i);
-            }
+            showDigitShape("████",
+                            "█  █",
+                            "█  █",
+                            "████", i);
             break;
         case ONE:
             showDigitShape("  █ ",
@@ -108,15 +106,13 @@ void DisplayRuan::showDigitShape(const char * line1, const char * line2, const c
     }
 }
 
-void DisplayRuan::showDigits(Digit digits[], int count, int decimalPos)
+void DisplayRuan::showDigits(Digit digits[], int count, int decimalPos, Signal signal)
 {
     clear();
+    this->signal = signal;
+    this->decimalPosition = decimalPos;
     for (int i = 0; i < count; i++)
-    {
-        if (i == decimalPos)
-            setDecimal();
         addDigit(digits[i]);
-    }
 }
 
 void DisplayRuan::addDigit(Digit digit)

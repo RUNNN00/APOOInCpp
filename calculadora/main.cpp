@@ -29,19 +29,22 @@ void testDisplay(Display& display) {
 
 void testCpu(Cpu& cpu) {
 
-  //cpu.setDecimal();
-  cpu.receiveDigit(ONE);
-  /*cpu.receiveDigit(ONE);
-  cpu.receiveDigit(TWO);
-  cpu.receiveDigit(EIGTH);*/
-
-  //cpu.receiveOperation(ADD);
-  cpu.receiveOperation(DIVIDE);
-
-  cpu.receiveDigit(TWO);
-  //cpu.receiveDigit(FIVE);
-  //cpu.receiveDigit(SIX);
+  //cpu.receiveDigit(ZERO);
+  //cpu.receiveDigit(ZERO);
+  //cpu.receiveOperation(SUBTRACT);
   //cpu.receiveDigit(TWO);
+  cpu.setDecimal();
+  cpu.receiveDigit(ONE);
+
+  cpu.receiveOperation(ADD);
+  //cpu.receiveOperation(SUBTRACT);
+
+  //cpu.setDecimal();
+  cpu.receiveDigit(FIVE);
+  //cpu.receiveDigit(SIX);
+  cpu.receiveOperation(SUBTRACT);
+  cpu.receiveDigit(FOUR);
+  cpu.receiveDigit(ONE);
 
   cpu.receiveControl(EQUAL);
 }

@@ -6,6 +6,7 @@ class CpuRuan : public Cpu {
         Display* display;
         Digit numA[MAX_DIGITS];
         Digit numB[MAX_DIGITS];
+        Signal signalNumA;
         char digitCountNumA;
         char digitCountNumB;
         char decimalPositionA;
@@ -14,7 +15,7 @@ class CpuRuan : public Cpu {
         int digitToInt(Digit);
         Digit intToDigit(int);
         float getOperand(Digit[], int, int);
-        void setExpressionInDigit(float);
+        void setExpressionInDigits(float);
         void addDigitNumA(Digit);
         void addDigitNumB(Digit);
         void operate();
