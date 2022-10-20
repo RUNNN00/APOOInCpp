@@ -93,6 +93,7 @@ void DisplayRuan::refresh()
         }
     }
     console.reset_color();
+    printf("\n");
 }
 
 void DisplayRuan::showDigitShape(const char * line1, const char * line2, const char * line3, const char * line4, unsigned char column){

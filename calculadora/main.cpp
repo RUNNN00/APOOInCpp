@@ -2,6 +2,7 @@
 
 #include "Calculator.hpp"
 #include "DisplayRuan.hpp"
+#include "DisplayYasmin.hpp"
 #include "CpuRuan.hpp"
 #include "KeyboardRuan.hpp"
 #include "KeyRuan.hpp"
@@ -33,7 +34,7 @@ void testCpu(Cpu& cpu) {
   //cpu.receiveDigit(ZERO);
   //cpu.receiveOperation(SUBTRACT);
   //cpu.receiveDigit(TWO);
-  cpu.setDecimal();
+  //cpu.setDecimal();
   cpu.receiveDigit(ONE);
 
   cpu.receiveOperation(ADD);
@@ -42,7 +43,7 @@ void testCpu(Cpu& cpu) {
   //cpu.setDecimal();
   cpu.receiveDigit(FIVE);
   //cpu.receiveDigit(SIX);
-  cpu.receiveOperation(SUBTRACT);
+  //cpu.receiveOperation(SUBTRACT);
   cpu.receiveDigit(FOUR);
   cpu.receiveDigit(ONE);
 
@@ -65,7 +66,8 @@ void testKeyboard(Keyboard& keyboard) {
 
 int main(){
   /* Fase de criação */
-  DisplayRuan display;
+  //DisplayRuan display;
+  DisplayYasmin display;
   CpuRuan cpu{display};
   KeyboardRuan keyboard{cpu};
 

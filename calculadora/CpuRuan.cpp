@@ -139,7 +139,16 @@ void CpuRuan::operate()
     }
 
     setExpressionInDigits(result);
-    display->showDigits(numA, digitCountNumA, decimalPositionA, signalNumA);
+
+    // atualiza o display
+    display->clear();
+    display->setSignal(signalNumA);
+    for (int i = 0; i < digitCountNumA; i++) {
+        display->addDigit(numA[i]);
+        
+        if (decimalPositionA == i)
+            display->setDecimal();
+    }
 }
 
 float CpuRuan::getOperand(Digit digits[], int count, int decimalPosition)

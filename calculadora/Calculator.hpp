@@ -1,17 +1,13 @@
 #pragma once
 
-#define MAX_DIGITS 8
-
-enum Digit { ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGTH, NINE };
+enum Digit { ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE };
 enum Signal { POSITIVE, NEGATIVE };
 enum Operation { ADD, SUBTRACT, MULTIPLY, DIVIDE, NOOP };
 enum Control { OFF, CLEAR, MEMORY_READ_CLEAR, MEMORY_SUBTRACTION, MEMORY_ADDITION, EQUAL, DECIMAL_SEPARATOR };
 
 class Display {
     public:
-        virtual void showDigits(Digit[], int, int, Signal) = 0;
-        virtual void addDigit(Digit) = 0;
-        virtual void setDecimal() = 0;
+        virtual void addDigit(Digit, bool withDot = false) = 0;
         virtual void setSignal(Signal) = 0;
         virtual void clear() = 0;
 };
@@ -24,7 +20,6 @@ class Cpu {
         virtual void receiveOperation(Operation) = 0;
         virtual void receiveControl(Control) = 0;
         virtual void setDisplay(Display&) = 0;
-        virtual void setDecimal() = 0;
 };
 
 class Keyboard;
