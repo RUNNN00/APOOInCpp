@@ -40,9 +40,9 @@ class Keyboard {
         virtual void setCpu(Cpu&) = 0;
 };
 
-/*class Calculator {
+class Calculator {
     public:
-        void setDisplay(Display display);
-        void setKeyboard(Keyboard keyboard);
-        void setCpu(Cpu cpu);
-};*/
+        virtual void setDisplay(Display&) = 0;
+        virtual void setKeyboard(Keyboard&) = 0;
+        virtual void setCpu(Cpu&) = 0;
+};
