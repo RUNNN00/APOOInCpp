@@ -15,11 +15,9 @@ void testDisplay(Display& display) {
    display.addDigit(ZERO);
    display.addDigit(ZERO);
    display.addDigit(ONE);
-   display.setDecimal();
    display.addDigit(TWO);
    display.addDigit(THREE);
    display.addDigit(ZERO);
-   display.setDecimal();
    display.addDigit(FOUR);
    display.addDigit(FIVE);
    display.addDigit(ONE);
@@ -79,7 +77,7 @@ int main(){
   KeyDigitRuan five{Digit::FIVE};
   KeyDigitRuan six{Digit::SIX};
   KeyDigitRuan seven{Digit::SEVEN};
-  KeyDigitRuan eigth{Digit::EIGTH};
+  KeyDigitRuan eigth{Digit::EIGHT};
   KeyDigitRuan nine{Digit::NINE};
 
   KeyOperationRuan addition{Operation::ADD};

@@ -3,6 +3,8 @@
 #include "Calculator.hpp"
 #include "Console.hpp"
 
+#define MAX_DIGITS 8
+
 class DisplayRuan : public Display
 {
 private:
@@ -16,9 +18,7 @@ private:
 public:
     DisplayRuan();
     ~DisplayRuan();
-    void showDigits(Digit[], int, int, Signal);
-    void addDigit(Digit);
-    void setDecimal();
+    void addDigit(Digit, bool withDot = false);
     void setSignal(Signal);
     void clear();
 };

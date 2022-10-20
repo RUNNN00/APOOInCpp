@@ -67,36 +67,6 @@ void CpuRuan::receiveControl(Control control)
     }
 }
 
-void CpuRuan::setDecimal()
-{
-    if (operation == Operation::NOOP)
-    {
-        if (decimalPositionA == MAX_DIGITS)
-        {
-            if (digitCountNumA == 0)
-            {
-                addDigitNumA(Digit::ZERO);
-                display->addDigit(Digit::ZERO);
-            }
-
-            decimalPositionA = digitCountNumA - 1;
-            display->setDecimal();
-        }
-    }
-    else if (decimalPositionB == MAX_DIGITS)
-    {
-        if (digitCountNumB == 0)
-        {
-            addDigitNumB(Digit::ZERO);
-            display->clear();
-            display->addDigit(Digit::ZERO);
-        }
-
-        decimalPositionB = digitCountNumB - 1;
-        display->setDecimal();
-    }
-}
-
 void CpuRuan::addDigitNumA(Digit digit)
 {
     if (digitCountNumA < MAX_DIGITS)
@@ -270,7 +240,7 @@ int CpuRuan::digitToInt(Digit digit)
     case Digit::SEVEN:
         return 7;
         break;
-    case Digit::EIGTH:
+    case Digit::EIGHT:
         return 8;
         break;
     case Digit::NINE:
@@ -310,7 +280,7 @@ Digit CpuRuan::intToDigit(int n)
         return Digit::SEVEN;
         break;
     case 8:
-        return Digit::EIGTH;
+        return Digit::EIGHT;
         break;
     case 9:
         return Digit::NINE;

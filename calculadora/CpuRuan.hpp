@@ -27,5 +27,4 @@ class CpuRuan : public Cpu {
         void receiveDigit(Digit);
         void receiveOperation(Operation);
         void receiveControl(Control);
-        void setDecimal();
 };

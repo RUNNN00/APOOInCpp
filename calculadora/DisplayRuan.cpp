@@ -72,7 +72,7 @@ void DisplayRuan::refresh()
                            " ██ ",
                            "█   ", i);
             break;
-        case EIGTH:
+        case EIGHT:
             showDigitShape("████",
                            "█▄▄█",
                            "█  █",
@@ -107,27 +107,9 @@ void DisplayRuan::showDigitShape(const char * line1, const char * line2, const c
     }
 }
 
-void DisplayRuan::showDigits(Digit digits[], int count, int decimalPos, Signal signal)
+void DisplayRuan::addDigit(Digit digit, bool withDot)
 {
-    clear();
-    this->signal = signal;
-    this->decimalPosition = decimalPos;
-    for (int i = 0; i < count; i++)
-        addDigit(digits[i]);
-}
-
-void DisplayRuan::addDigit(Digit digit)
-{
-    if (digitCount < MAX_DIGITS)
-    {
-        digits[digitCount++] = digit;
-        refresh();
-    }
-}
-
-void DisplayRuan::setDecimal()
-{
-    decimalPosition = digitCount - 1;
+    // TODO refazer...
 }
 
 void DisplayRuan::setSignal(Signal signal)
