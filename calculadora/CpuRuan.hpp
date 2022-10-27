@@ -4,22 +4,17 @@
 class CpuRuan : public Cpu {
     private:
         Display* display;
-        Digit numA[MAX_DIGITS];
-        Digit numB[MAX_DIGITS];
-        Signal signalNumA;
-        char digitCountNumA;
-        char digitCountNumB;
-        char decimalPositionA;
-        char decimalPositionB;
         Operation operation;
+        Digit digitsOperandA[MAX_DIGITS];
+        Digit digitsOperandB[MAX_DIGITS];
+        unsigned char countOperandA;
+        unsigned char countOperandB;
+        void operate();
         int digitToInt(Digit);
         Digit intToDigit(int);
         float getOperand(Digit[], int, int);
-        void setExpressionInDigits(float);
         void addDigitNumA(Digit);
         void addDigitNumB(Digit);
-        void operate();
-
     public:
         CpuRuan();
         CpuRuan(Display&);

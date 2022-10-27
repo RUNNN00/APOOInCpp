@@ -102,14 +102,22 @@ void DisplayRuan::showDigitShape(const char * line1, const char * line2, const c
     console.set_cursor(3, (MAX_DIGITS - digitCount + 1 + column) * 6);printf(line3);
     console.set_cursor(4, (MAX_DIGITS - digitCount + 1 + column) * 6);printf(line4);
 
-    if (decimalPosition == column) {
+    if (decimalPosition == column)
         console.set_cursor(4, (MAX_DIGITS - digitCount + 1 + column) * 6 + 4);printf("▗");
-    }
 }
 
 void DisplayRuan::addDigit(Digit digit, bool withDot)
 {
-    // TODO refazer...
+    if (digitCount < MAX_DIGITS) {
+        digits[digitCount] = digit;
+
+        if (withDot)
+            decimalPosition = digitCount;
+
+        digitCount++;
+    }
+    
+    refresh();
 }
 
 void DisplayRuan::setSignal(Signal signal)
