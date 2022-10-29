@@ -1,5 +1,3 @@
-#include <math.h>
-
 #include "CpuRuan.hpp"
 #include "Calculator.hpp"
 
@@ -135,7 +133,7 @@ int CpuRuan::digitToInt(Digit digit)
     case Digit::SEVEN:
         return 7;
         break;
-    case Digit::EIGHT:
+    case Digit::EIGTH:
         return 8;
         break;
     case Digit::NINE:
@@ -175,7 +173,7 @@ Digit CpuRuan::intToDigit(int n)
         return Digit::SEVEN;
         break;
     case 8:
-        return Digit::EIGHT;
+        return Digit::EIGTH;
         break;
     case 9:
         return Digit::NINE;

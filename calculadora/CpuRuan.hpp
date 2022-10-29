@@ -1,6 +1,8 @@
 #pragma once
 #include "Calculator.hpp"
 
+#define MAX_DIGITS 8
+
 class CpuRuan : public Cpu {
     private:
         Display* display;
@@ -12,7 +14,6 @@ class CpuRuan : public Cpu {
         void operate();
         int digitToInt(Digit);
         Digit intToDigit(int);
-        float getOperand(Digit[], int, int);
         void addDigitNumA(Digit);
         void addDigitNumB(Digit);
     public:

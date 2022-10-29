@@ -2,7 +2,6 @@
 
 #include "Calculator.hpp"
 #include "DisplayRuan.hpp"
-#include "DisplayYasmin.hpp"
 #include "CpuRuan.hpp"
 #include "KeyboardRuan.hpp"
 #include "KeyRuan.hpp"
@@ -13,8 +12,8 @@ void testDisplay(Display& display) {
    display.addDigit(ZERO);
    display.clear();
    display.addDigit(ZERO);
-   display.addDigit(ZERO);
-   display.addDigit(ONE);
+   display.addDigit(ZERO, true);
+   display.addDigit(ONE, true);
    display.addDigit(TWO);
    display.addDigit(THREE);
    display.addDigit(ZERO);
@@ -64,8 +63,7 @@ void testKeyboard(Keyboard& keyboard) {
 
 int main(){
   /* Fase de criação */
-  //DisplayRuan display;
-  DisplayYasmin display;
+  DisplayRuan display;
   CpuRuan cpu{display};
   KeyboardRuan keyboard{cpu};
 
@@ -77,7 +75,7 @@ int main(){
   KeyDigitRuan five{Digit::FIVE};
   KeyDigitRuan six{Digit::SIX};
   KeyDigitRuan seven{Digit::SEVEN};
-  KeyDigitRuan eigth{Digit::EIGHT};
+  KeyDigitRuan eigth{Digit::EIGTH};
   KeyDigitRuan nine{Digit::NINE};
 
   KeyOperationRuan addition{Operation::ADD};
@@ -92,6 +90,6 @@ int main(){
 
   /* Fase de testes */
   //testKeyboard(keyboard);
-  //testDisplay(display);
-  testCpu(cpu);
+  testDisplay(display);
+  //testCpu(cpu);
 }

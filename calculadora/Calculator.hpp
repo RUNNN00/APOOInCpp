@@ -1,6 +1,6 @@
 #pragma once
 
-enum Digit { ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE };
+enum Digit { ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGTH, NINE };
 enum Signal { POSITIVE, NEGATIVE };
 enum Operation { ADD, SUBTRACT, MULTIPLY, DIVIDE, NOOP };
 enum Control { OFF, CLEAR, MEMORY_READ_CLEAR, MEMORY_SUBTRACTION, MEMORY_ADDITION, EQUAL, DECIMAL_SEPARATOR };
@@ -16,10 +16,10 @@ class Cpu {
     private:
         Display* display;
     public:
+        virtual void setDisplay(Display&) = 0;
         virtual void receiveDigit(Digit) = 0;
         virtual void receiveOperation(Operation) = 0;
         virtual void receiveControl(Control) = 0;
-        virtual void setDisplay(Display&) = 0;
 };
 
 class Keyboard;

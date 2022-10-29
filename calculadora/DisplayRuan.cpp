@@ -72,7 +72,7 @@ void DisplayRuan::refresh()
                            " ██ ",
                            "█   ", i);
             break;
-        case EIGHT:
+        case EIGTH:
             showDigitShape("████",
                            "█▄▄█",
                            "█  █",
@@ -102,8 +102,10 @@ void DisplayRuan::showDigitShape(const char * line1, const char * line2, const c
     console.set_cursor(3, (MAX_DIGITS - digitCount + 1 + column) * 6);printf(line3);
     console.set_cursor(4, (MAX_DIGITS - digitCount + 1 + column) * 6);printf(line4);
 
-    if (decimalPosition == column)
-        console.set_cursor(4, (MAX_DIGITS - digitCount + 1 + column) * 6 + 4);printf("▗");
+    if (decimalPosition == column) {
+        console.set_cursor(4, (MAX_DIGITS - digitCount + 1 + column) * 6 + 4);
+        printf("▗");
+    }
 }
 
 void DisplayRuan::addDigit(Digit digit, bool withDot)
@@ -122,8 +124,7 @@ void DisplayRuan::addDigit(Digit digit, bool withDot)
 
 void DisplayRuan::setSignal(Signal signal)
 {
-    if (digitCount < 1)
-        this->signal = signal;
+    this->signal = signal;
 }
 
 void DisplayRuan::clear()
